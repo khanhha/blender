@@ -85,6 +85,7 @@ typedef enum ModifierType {
 	eModifierType_DataTransfer      = 49,
 	eModifierType_NormalEdit        = 50,
 	eModifierType_CorrectiveSmooth  = 51,
+	eModifierType_BSkin				= 52,
 	NUM_MODIFIER_TYPES
 } ModifierType;
 
@@ -1239,6 +1240,19 @@ enum {
 enum {
 	MOD_SKIN_SMOOTH_SHADING = 1,
 };
+
+/* BSkin modifier */
+typedef struct BSkinModifierData {
+	ModifierData modifier;
+
+	float branch_smoothing;
+
+	char flag;
+
+	char symmetry_axes;
+
+	char pad[2];
+} BSkinModifierData;
 
 /* Triangulate modifier */
 typedef struct TriangulateModifierData {

@@ -85,6 +85,7 @@ set(SRC
 	intern/MOD_shrinkwrap.c
 	intern/MOD_simpledeform.c
 	intern/MOD_skin.c
+	intern/MOD_bskin.c
 	intern/MOD_smoke.c
 	intern/MOD_smooth.c
 	intern/MOD_softbody.c
