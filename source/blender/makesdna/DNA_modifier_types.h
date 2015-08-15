@@ -1245,13 +1245,8 @@ enum {
 typedef struct BSkinModifierData {
 	ModifierData modifier;
 
-	float branch_smoothing;
-
-	char flag;
-
-	char symmetry_axes;
-
-	char pad[2];
+	short subdivision_level;
+	char pad[6];
 } BSkinModifierData;
 
 /* Triangulate modifier */

@@ -169,6 +169,10 @@ ModifierData *ED_object_modifier_add(ReportList *reports, Main *bmain, Scene *sc
 			/* ensure skin-node customdata exists */
 			BKE_mesh_ensure_skin_customdata(ob->data);
 		}
+		else if (type == eModifierType_BSkin) {
+			/* ensure skin-node customdata exists */
+			BKE_mesh_ensure_skin_customdata(ob->data);
+		}
 	}
 
 	DAG_id_tag_update(&ob->id, OB_RECALC_DATA);
@@ -311,6 +315,11 @@ static bool object_modifier_remove(Main *bmain, Object *ob, ModifierData *md,
 	else if (md->type == eModifierType_Skin) {
 		/* Delete MVertSkin layer if not used by another skin modifier */
 		if (object_modifier_safe_to_delete(bmain, ob, md, eModifierType_Skin))
+			modifier_skin_customdata_delete(ob);
+	}
+	else if (md->type == eModifierType_BSkin) {
+		/* Delete MVertSkin layer if not used by another skin modifier */
+		if (object_modifier_safe_to_delete(bmain, ob, md, eModifierType_BSkin))
 			modifier_skin_customdata_delete(ob);
 	}
 

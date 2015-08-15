@@ -3971,29 +3971,11 @@ static void rna_def_modifier_bskin(BlenderRNA *brna)
 	RNA_def_struct_sdna(srna, "BSkinModifierData");
 	RNA_def_struct_ui_icon(srna, ICON_MOD_SKIN);
 
-	prop = RNA_def_property(srna, "branch_smoothing", PROP_FLOAT, PROP_FACTOR);
-	RNA_def_property_ui_text(prop, "Branch Smoothing", "Smooth complex geometry around branches");
+	prop = RNA_def_property(srna, "subdivision_level", PROP_INT, PROP_UNSIGNED);
+	RNA_def_property_int_sdna(prop, NULL, "subdivision_level");
+	RNA_def_property_ui_text(prop, "Subdivision Level", "");
 	RNA_def_property_ui_range(prop, 0, 1, 1, -1);
-	RNA_def_property_update(prop, 0, "rna_Modifier_update");
-
-	prop = RNA_def_property(srna, "use_smooth_shade", PROP_BOOLEAN, PROP_NONE);
-	RNA_def_property_boolean_sdna(prop, NULL, "flag", MOD_SKIN_SMOOTH_SHADING);
-	RNA_def_property_ui_text(prop, "Smooth Shading", "Output faces with smooth shading rather than flat shaded");
-	RNA_def_property_update(prop, 0, "rna_Modifier_update");
-
-	prop = RNA_def_property(srna, "use_x_symmetry", PROP_BOOLEAN, PROP_NONE);
-	RNA_def_property_boolean_sdna(prop, NULL, "symmetry_axes", MOD_SKIN_SYMM_X);
-	RNA_def_property_ui_text(prop, "X", "Avoid making unsymmetrical quads across the X axis");
-	RNA_def_property_update(prop, 0, "rna_Modifier_update");
-
-	prop = RNA_def_property(srna, "use_y_symmetry", PROP_BOOLEAN, PROP_NONE);
-	RNA_def_property_boolean_sdna(prop, NULL, "symmetry_axes", MOD_SKIN_SYMM_Y);
-	RNA_def_property_ui_text(prop, "Y", "Avoid making unsymmetrical quads across the Y axis");
-	RNA_def_property_update(prop, 0, "rna_Modifier_update");
-
-	prop = RNA_def_property(srna, "use_z_symmetry", PROP_BOOLEAN, PROP_NONE);
-	RNA_def_property_boolean_sdna(prop, NULL, "symmetry_axes", MOD_SKIN_SYMM_Z);
-	RNA_def_property_ui_text(prop, "Z", "Avoid making unsymmetrical quads across the Z axis");
+	RNA_def_property_range(prop, 0, 1);
 	RNA_def_property_update(prop, 0, "rna_Modifier_update");
 }
 static void rna_def_modifier_triangulate(BlenderRNA *brna)

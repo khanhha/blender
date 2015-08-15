@@ -280,6 +280,10 @@ void BKE_object_link_modifiers(struct Object *ob_dst, const struct Object *ob_sr
 				/* ensure skin-node customdata exists */
 				BKE_mesh_ensure_skin_customdata(ob_dst->data);
 				break;
+			case eModifierType_BSkin:
+				/* ensure skin-node customdata exists */
+				BKE_mesh_ensure_skin_customdata(ob_dst->data);
+				break;
 		}
 
 		nmd = modifier_new(md->type);

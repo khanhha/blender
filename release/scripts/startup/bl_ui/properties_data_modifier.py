@@ -1144,11 +1144,11 @@ class DATA_PT_modifiers(ModifierButtonsPanel, Panel):
         layout.separator()
         self.vertex_weight_mask(layout, ob, md)
 
-	def BSKIN():
-		split = layout.split(percentage=0.25)
-        col = split.column()
-        col.prop(md, "scaleui")
-		
+    def BSKIN(self, layout, ob, md):
+        row = layout.row()
+        row = layout.row(align=True)
+        row.prop(md, "subdivision_level")
+
     def SKIN(self, layout, ob, md):
         row = layout.row()
         row.operator("object.skin_armature_create", text="Create Armature")

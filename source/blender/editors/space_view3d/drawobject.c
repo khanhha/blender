@@ -215,6 +215,13 @@ static void draw_empty_sphere(float size);
 static void draw_empty_cone(float size);
 static void draw_box(float vec[8][3], bool solid);
 
+//#define MODIFIER_BSKIN 1
+#ifdef MODIFIER_BSKIN
+#include "BLI_buffer.h"
+typedef float spoint3f[3];
+BLI_buffer_declare(spoint3f, g_bskin_debug_points, BLI_BUFFER_NOP);
+#endif
+
 static void ob_wire_color_blend_theme_id(const unsigned char ob_wire_col[4], const int theme_id, float fac)
 {
 	float col_wire[3], col_bg[3], col[3];
@@ -7586,6 +7593,22 @@ static void draw_rigidbody_shape(Object *ob)
 			break;
 	}
 }
+#ifdef MODIFIER_BSKIN
+static void bskin_debug_draw_points()
+{
+	int i;
+	glPushAttrib(GL_CURRENT_BIT | GL_POINT_BIT| GL_COLOR_BUFFER_BIT);
+	glPointSize(4.0);
+	glColor3f(1.0f, 0.0, 0.0);
+	glBegin(GL_POINTS);
+	for (i = 0; i < g_bskin_debug_points.count; ++i){
+		spoint3f* dpoint = BLI_buffer_at(&g_bskin_debug_points, spoint3f, i);
+		glVertex3fv(dpoint);
+	}
+	glEnd();
+	glPopAttrib();
+}
+#endif
 
 /**
  * main object drawing function, draws in selection
@@ -7661,6 +7684,11 @@ void draw_object(Scene *scene, ARegion *ar, View3D *v3d, Base *base, const short
 			}
 		}
 	}
+#ifdef MODIFIER_BSKIN
+	if ((md = modifiers_findByType(ob, eModifierType_BSkin)) && (modifier_isEnabled(scene, md, eModifierMode_Realtime))) {
+		bskin_debug_draw_points();
+	}
+#endif
 
 
 	/* xray delay? */

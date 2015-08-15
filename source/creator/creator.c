@@ -29,7 +29,6 @@
  *  \ingroup creator
  */
 
-
 #if defined(__linux__) && defined(__GNUC__)
 #  define _GNU_SOURCE
 #  include <fenv.h>
@@ -1615,6 +1614,7 @@ static void *evil_C = NULL;
 char **environ = NULL;
 #  endif
 #endif
+
 
 /**
  * Blender's main function responsabilities are:
