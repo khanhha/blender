@@ -1145,8 +1145,10 @@ class DATA_PT_modifiers(ModifierButtonsPanel, Panel):
         # Common mask options
         layout.separator()
         self.vertex_weight_mask(layout, ob, md)
+		
 
-    def SKIN(self, layout, ob, md):
+		
+	def SKIN(self, layout, ob, md):
         row = layout.row()
         row.operator("object.skin_armature_create", text="Create Armature")
         row.operator("mesh.customdata_skin_add")

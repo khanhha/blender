@@ -85,6 +85,7 @@ EnumPropertyItem modifier_type_items[] = {
 	{eModifierType_Remesh, "REMESH", ICON_MOD_REMESH, "Remesh", ""},
 	{eModifierType_Screw, "SCREW", ICON_MOD_SCREW, "Screw", ""},
 	{eModifierType_Skin, "SKIN", ICON_MOD_SKIN, "Skin", ""},
+	{eModifierType_BSkin, "BSKIN", ICON_MOD_SKIN, "BSkin", "" },
 	{eModifierType_Solidify, "SOLIDIFY", ICON_MOD_SOLIDIFY, "Solidify", ""},
 	{eModifierType_Subsurf, "SUBSURF", ICON_MOD_SUBSURF, "Subdivision Surface", ""},
 	{eModifierType_Triangulate, "TRIANGULATE", ICON_MOD_TRIANGULATE, "Triangulate", ""},
@@ -362,6 +363,8 @@ static StructRNA *rna_Modifier_refine(struct PointerRNA *ptr)
 			return &RNA_RemeshModifier;
 		case eModifierType_Skin:
 			return &RNA_SkinModifier;
+		case eModifierType_BSkin:
+			return &RNA_BSkinModifier;
 		case eModifierType_LaplacianSmooth:
 			return &RNA_LaplacianSmoothModifier;
 		case eModifierType_Triangulate:
@@ -3930,6 +3933,23 @@ static void rna_def_modifier_ocean(BlenderRNA *brna)
 	/*RNA_def_property_update(prop, 0, "rna_Modifier_update"); */
 	/* XXX how to update? */
 }
+static void rna_def_modifier_bskin(BlenderRNA *brna)
+{
+	StructRNA *srna;
+	PropertyRNA *prop;
+
+	srna = RNA_def_struct(brna, "BSkinModifier", "Modifier");
+	RNA_def_struct_ui_text(srna, "BSkin Modifier", "Generate Skin");
+	RNA_def_struct_sdna(srna, "BSkinModifierData");
+	RNA_def_struct_ui_icon(srna, ICON_MOD_SKIN);
+
+	prop = RNA_def_property(srna, "subdivision_level", PROP_INT, PROP_UNSIGNED);
+	RNA_def_property_int_sdna(prop, NULL, "subdivision_level");
+	RNA_def_property_ui_text(prop, "Subdivision Level", "");
+	RNA_def_property_ui_range(prop, 0, 1, 1, -1);
+	RNA_def_property_range(prop, 0, 1);
+	RNA_def_property_update(prop, 0, "rna_Modifier_update");
+}
 
 static void rna_def_modifier_skin(BlenderRNA *brna)
 {
@@ -4682,6 +4702,7 @@ void RNA_def_modifier(BlenderRNA *brna)
 	rna_def_modifier_ocean(brna);
 	rna_def_modifier_remesh(brna);
 	rna_def_modifier_skin(brna);
+	rna_def_modifier_bskin(brna);
 	rna_def_modifier_laplaciansmooth(brna);
 	rna_def_modifier_triangulate(brna);
 	rna_def_modifier_meshcache(brna);

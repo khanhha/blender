@@ -49,6 +49,7 @@ set(SRC
 	intern/MOD_bevel.c
 	intern/MOD_boolean.c
 	intern/MOD_build.c
+	intern/MOD_bskin.c
 	intern/MOD_cast.c
 	intern/MOD_cloth.c
 	intern/MOD_collision.c

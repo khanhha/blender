@@ -75,6 +75,7 @@ extern ModifierTypeInfo modifierType_WeightVGProximity;
 extern ModifierTypeInfo modifierType_DynamicPaint;
 extern ModifierTypeInfo modifierType_Remesh;
 extern ModifierTypeInfo modifierType_Skin;
+extern ModifierTypeInfo modifierType_BSkin;
 extern ModifierTypeInfo modifierType_LaplacianSmooth;
 extern ModifierTypeInfo modifierType_Triangulate;
 extern ModifierTypeInfo modifierType_UVWarp;
